@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="/css/bootstrap.min.css"/>
+        <style>
+            .nav{
+                background-color: darkorange;
+                padding: 14px 28px;
+            }
+            a{
+                text-decoration: none;
+                padding: 14px 28px;
+                
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="nav">
+            <h:form>
+                <h:commandLink action="dashboard">Home</h:commandLink>
+            <h:commandLink action="view">View</h:commandLink>
+        </h:form>
+        </div>
+        <h6>Table Here</h6>
+       <h:form>
+            <center>
+                <h2><h:outputText value="User Records"/></h2>
+            </center>
+           <h:dataTable binding="#{table}" value="#{studentBean.usersList()}" var="u" class="table table-striped table-hover table-bordered" >
+                
+               <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{table.rowIndex + 1}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">First Name</f:facet>
+                    <h:outputText value="#{u.firstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last Name</f:facet>
+                    <h:outputText value="#{u.lastName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">County</f:facet>
+                    <h:outputText value="#{u.county}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Username</f:facet>
+                    <h:outputText value="#{u.username}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Password</f:facet>
+                    <h:outputText value="#{u.password}"/>
+                </h:column>
+                <h:column> 
+                    <f:facet name="header">Update</f:facet>
+                    <h:commandButton action = "#{studentBean.edit(u.id)}" value="Update" class="btn btn-primary"> 
+                    </h:commandButton>
+                </h:column>
+                <h:column> 
+                    <f:facet name="header">Delete</f:facet>
+                    <h:commandButton action = "#{studentBean.delete(u.id)}" value="Delete" class="btn btn-danger"> 
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
